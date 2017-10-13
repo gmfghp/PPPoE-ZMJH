@@ -4,20 +4,20 @@
 #### 2.安装pppoe服务端
 安装自己路由器对应版本的ipk(这里以我的路由器为例)。
 
-方法一(路由器可以上网或者用hfs上传)：
+方法一(路由器可以上网)：
 ```sh
 opkg update
 opkg install rp-pppoe-server
 ```
 
-方法二(路由器无法上网，自行下载对应ipk，这里以tengda-ac9为例)：
+方法二(路由器无法上网，自行下载对应ipk，<或者用hfs上传> 这里以tengda-ac9为例)：
 ```sh
 opkg install rp-pppoe-common_3.12-1_arm_cortex-a9.ipk
 opkg install rp-pppoe-server_3.12-1_arm_cortex-a9.ipk
 ```
-#### 3.运行ZHJHconf.sh。
+#### 3.运行ZMJHconf.sh。
 ```sh
-sh ZHJHconf.sh
+sh ZMJHconf.sh
 ```
 ### （二）查看路由器的拨号账号密码
 
