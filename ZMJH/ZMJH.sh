@@ -35,6 +35,17 @@ do
 	if [ -z "$(ifconfig | grep "WAN0ZMHQ")" ]
 	then
 		ifdown WAN0ZMHQ
+	else
+		sleep 50
 	fi
-
+	
+	#clear logs everyday
+	if [ "$(date '+%T' | cut -b 1-5)" == "00:00" ]
+	then
+		cat /dev/null > /tmp/ZMJH-pppoe.log
+		sleep 10
+		echo "$var" >> /tmp/ZMJH-pppoe.log
+		sleep 10
+	fi
+	
 done
