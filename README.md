@@ -5,4 +5,4 @@
 
 用tail命令查看拨号账号密码
 
-tail -9 /tmp/ZHMM.log
+  tail -9 /tmp/ZHMM.log
