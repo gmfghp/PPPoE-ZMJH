@@ -9,6 +9,7 @@ pppoe-server -k -I br-lan
 
 #clear logs
 cat /dev/null > /tmp/ZMJH-pppoe.log
+cat /dev/null > /tmp/ZHMM.log
 
 while :
 do
@@ -19,13 +20,14 @@ do
 	word=${var#*'" password="'}
 	password=${word%'"'*}
 
-	if [ "$username" != "$username_old" ]
+	if [ "$username"x != "$username_old"x ]
 	then
 		ifdown WAN0ZMHQ
 		uci set network.WAN0ZMHQ.username="$username"
 		uci set network.WAN0ZMHQ.password="$password"
 		uci commit
 		ifup WAN0ZMHQ
+		echo "$var" >> /tmp/ZHMM.log
 		username_old="$username"
 		logger -t ZMJH "new username $username"
 	fi
@@ -43,6 +45,7 @@ do
 	if [ "$(date '+%T' | cut -b 1-5)" == "00:00" ]
 	then
 		cat /dev/null > /tmp/ZMJH-pppoe.log
+		cat /dev/null > /tmp/ZHMM.log
 		sleep 10
 		echo "$var" >> /tmp/ZMJH-pppoe.log
 		sleep 10
