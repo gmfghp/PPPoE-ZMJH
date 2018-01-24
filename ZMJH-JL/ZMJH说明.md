@@ -46,4 +46,6 @@ opkg update
 一般会返回类似网址，去网址里找包
 ```
 Downloading http://downloads.openwrt.org.cn/PandoraBox/ralink/packages/routing/Packages.gz.
-```
+`
+
+**这个文件夹里面的脚本是可以记录已经获取的 账号密码 方便查阅。
