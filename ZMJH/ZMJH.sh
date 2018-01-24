@@ -42,7 +42,7 @@ do
 	fi
 	
 	#clear logs everyday
-	if [ "$(date '+%T' | cut -b 1-5)" == "00:00" ]
+	if [ "$(date '+%T' | cut -b 1-4)" == "00:0" ]
 	then
 		cat /dev/null > /tmp/ZMJH-pppoe.log
 		cat /dev/null > /tmp/ZHMM.log
