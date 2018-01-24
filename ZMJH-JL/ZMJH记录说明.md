@@ -47,5 +47,5 @@ opkg update
 ```
 Downloading http://downloads.openwrt.org.cn/PandoraBox/ralink/packages/routing/Packages.gz.
 `
-
-**这个文件夹里面的脚本是可以记录已经获取的 账号密码 方便查阅。
+*** *** ***
+( ZMJH-JL )这个文件夹里面的脚本是可以无时间间隔（1s）进行记录已经获取的 账号密码 方便查阅。
