@@ -1,0 +1,54 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+OVERLAY="$( grep ' /overlay ' /proc/mounts )"
+
+case "$ACTION" in
+pressed)
+	[ -z "$OVERLAY" ] && return 0
+
+	return 5
+;;
+timeout)
+	. /etc/diag.sh
+	set_state failsafe
+;;
+released)
+	if [ "$SEEN" -ge 1 ] && [ "$SEEN" -lt 5 ]
+	then
+		#echo "REBOOT" > /dev/console
+		#sync
+		#reboot
+		{
+		# Get WIFI status
+		wifi_status=$(wifi status | grep '"up":')
+		wifi_status=${wifi_status:8:4}
+
+		#Open or close the WIFI
+		if [ "$wifi_status" = 'true' ]
+		then
+			logger "Now turn wifi off"
+			wifi down
+		else
+			logger "Now turn wifi on"
+			wifi up
+		fi
+		}
+		sleep 1
+
+	elif [ "$SEEN" -ge 5 ] && [ "$SEEN" -lt 10 ]
+	then
+		echo "REBOOT" > /dev/console
+		sync
+		reboot
+
+	#elif [ "$SEEN" -gt 5 -a -n "$OVERLAY" ]
+	#then
+		#echo "FACTORY RESET" > /dev/console
+		#jffs2reset -y && reboot &
+	fi
+;;
+esac
+
+return 0
