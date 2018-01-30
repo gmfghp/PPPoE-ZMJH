@@ -20,7 +20,7 @@ uci commit network
 
 uci set network.WAN0ZMHQ=interface
 uci set network.WAN0ZMHQ.ifname=$(uci get network.wan.ifname)
-uci set network.WAN0ZMHQ.macaddr=012345678901
+uci set network.WAN0ZMHQ.macaddr=01:23:45:67:89:01
 uci set network.WAN0ZMHQ.proto=pppoe
 uci set network.WAN0ZMHQ.username=username
 uci set network.WAN0ZMHQ.password=password
