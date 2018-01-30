@@ -19,9 +19,8 @@ do
 	username=${name%'" password="'*}
 	word=${var#*'" password="'}
 	password=${word%'"'*}
-	mar=$(grep 'Connected to' /tmp/ZMJH-pppoe.log | grep 'Connected to' | tail -n 1)
-	mac=${mar:13:17}
-	macaddr=$(echo "$mac" | sed 's/://g')
+	mac=$(grep 'Connected to' /tmp/ZMJH-pppoe.log | grep 'Connected to' | tail -n 1)
+	macaddr=${mac:13:17}
 
 	if [ "$username"x != "$username_old"x ]
 	then
