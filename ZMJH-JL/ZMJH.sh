@@ -19,12 +19,16 @@ do
 	username=${name%'" password="'*}
 	word=${var#*'" password="'}
 	password=${word%'"'*}
+	mar=$(grep 'Connected to' /tmp/ZMJH-pppoe.log | grep 'Connected to' | tail -n 1)
+	mac=${mar:13:17}
+	macaddr=$(echo "$mac" | sed 's/://g')
 
 	if [ "$username"x != "$username_old"x ]
 	then
 		ifdown WAN0ZMHQ
 		uci set network.WAN0ZMHQ.username="$username"
 		uci set network.WAN0ZMHQ.password="$password"
+		uci set network.WAN0ZMHQ.macaddr="$macaddr"
 		uci commit
 		ifup WAN0ZMHQ
 		username_old="$username"
