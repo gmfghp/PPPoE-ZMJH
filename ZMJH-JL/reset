@@ -37,7 +37,7 @@ released)
 		}
 		sleep 1
 
-	elif [ "$SEEN" -ge 5 ] && [ "$SEEN" -lt 10 ]
+	elif [ "$SEEN" -ge 5 ]
 	then
 		echo "REBOOT" > /dev/console
 		sync
