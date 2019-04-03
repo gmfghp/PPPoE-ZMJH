@@ -35,7 +35,6 @@ released)
 			wifi up
 		fi
 		}
-		sleep 1
 
 	elif [ "$SEEN" -ge 5 ]
 	then
