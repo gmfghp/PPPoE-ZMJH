@@ -1,0 +1,72 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+OVERLAY="$( grep ' /overlay ' /proc/mounts )"
+
+case "$ACTION" in
+pressed)
+	[ -z "$OVERLAY" ] && return 0
+
+	return 5
+;;
+timeout)
+	. /etc/diag.sh
+	set_state failsafe
+;;
+released)
+
+#The following is the revision
+if [ "$SEEN" -ge 1 ] && [ "$SEEN" -lt 5 ]
+then
+	{
+		vbr_0judge=$(grep 'judge=' /root/0judge.log | tail -n 1)
+		vbr_judge=${vbr_0judge:6:1}
+		#Judging whether to execute
+		if [ "$vbr_judge"x == "1"x ]
+		then
+			#time effective
+			cat /dev/null > /root/0judge.log
+			echo "judge=0" >> /root/0judge.log
+		else
+			#Invalid time
+			cat /dev/null > /root/0judge.log
+			echo "judge=1" >> /root/0judge.log
+		fi
+	}
+
+elif [ "$SEEN" -ge 5 ] && [ "$SEEN" -lt 9 ]
+then
+	#echo "REBOOT" > /dev/console
+	#sync
+	#reboot
+	{
+		# Get WIFI status
+		wifi_status=$(wifi status | grep '"up":')
+		wifi_status=${wifi_status:8:4}
+		#Open or close the WIFI
+		if [ "$wifi_status" = 'true' ]
+		then
+			logger "Now turn wifi off"
+			wifi down
+		else
+			logger "Now turn wifi on"
+			wifi up
+		fi
+	}
+
+elif [ "$SEEN" -ge 9 ]
+then
+#elif [ "$SEEN" -gt 5 -a -n "$OVERLAY" ]
+#then
+	#echo "FACTORY RESET" > /dev/console
+	#jffs2reset -y && reboot &
+	echo "REBOOT" > /dev/console
+	sync
+	reboot
+fi
+
+;;
+esac
+
+return 0
