@@ -23,7 +23,6 @@ uci set network.WAN0ZMHQ.ifname=$(uci get network.wan.ifname)
 uci set network.WAN0ZMHQ.proto=pppoe
 uci set network.WAN0ZMHQ.username=username
 uci set network.WAN0ZMHQ.password=password
-uci set network.WAN0ZMHQ.metric='0'
 uci set network.WAN0ZMHQ.auto='0'
 uci commit network
 
