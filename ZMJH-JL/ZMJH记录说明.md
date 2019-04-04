@@ -49,3 +49,7 @@ Downloading http://downloads.openwrt.org.cn/PandoraBox/ralink/packages/routing/P
 `
 *** *** ***
 ( ZMJH-JL )这个文件夹里面的脚本是可以无时间间隔（1s）进行记录已经获取的 账号密码 方便查阅。
+
+用tail命令查看拨号账号密码
+
+tail -9 /tmp/ZHMM.log
